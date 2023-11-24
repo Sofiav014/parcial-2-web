@@ -9,27 +9,11 @@ import { PerformerEntity } from '../performer/performer.entity/performer.entity'
 export class PerformerAlbumService {
     constructor(
         @InjectRepository(AlbumEntity)
-        private albumRepository: Repository<AlbumEntity>,
+        private readonly albumRepository: Repository<AlbumEntity>,
 
         @InjectRepository(PerformerEntity)
-        private performerRepository: Repository<PerformerEntity>,
+        private readonly performerRepository: Repository<PerformerEntity>,
     ) {}
-    //Implemente
-    // el método
-    // add
-    // PerformerToAlbum
-    // (albumId
-    // , performerId
-    // )
-    // el cual agrega un
-    // performer a un álbum
-    // .
-    // Valide
-    // que tanto el
-    // performer
-    // como el álbum existen. Un
-    // álbum no
-    // puede tener más de tres performers asociados
 
     async addPerformerToAlbum(albumId: string, performerId: string): Promise<AlbumEntity> {
         const album = await this.albumRepository.findOne({where: {id: albumId}, relations: ["performers"]});

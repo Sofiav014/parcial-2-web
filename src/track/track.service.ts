@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AlbumEntity } from 'src/album/album.entity/album.entity';
 import { Repository } from 'typeorm';
+import { AlbumEntity } from '../album/album.entity/album.entity';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 import { TrackEntity } from './track.entity/track.entity';
 
@@ -10,10 +10,10 @@ import { TrackEntity } from './track.entity/track.entity';
 export class TrackService {
     constructor(
         @InjectRepository(TrackEntity)
-        private trackRepository: Repository<TrackEntity>,
+        private readonly trackRepository: Repository<TrackEntity>,
 
         @InjectRepository(AlbumEntity)
-        private albumRepository: Repository<AlbumEntity>,
+        private readonly albumRepository: Repository<AlbumEntity>,
     ) {}
 
     async create(albumId: string, track: TrackEntity): Promise<TrackEntity> {

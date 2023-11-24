@@ -9,7 +9,7 @@ import { PerformerEntity } from './performer.entity/performer.entity';
 export class PerformerService {
     constructor(
         @InjectRepository(PerformerEntity)
-        private performerRepository: Repository<PerformerEntity>,
+        private readonly performerRepository: Repository<PerformerEntity>,
     ) {}
 
     async create(performer: PerformerEntity): Promise<PerformerEntity> {

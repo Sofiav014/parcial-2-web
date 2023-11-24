@@ -9,14 +9,14 @@ import { AlbumEntity } from './album.entity/album.entity';
 export class AlbumService {
     constructor(
         @InjectRepository(AlbumEntity)
-        private albumRepository: Repository<AlbumEntity>,
+        private readonly albumRepository: Repository<AlbumEntity>,
     ) {}
     
     async create(album: AlbumEntity): Promise<AlbumEntity> {
-        if (!album.nombre) {
+        if (!album.nombre || album.nombre.length < 1) {
             throw new BusinessLogicException("The name of the album is required", BusinessError.PRECONDITION_FAILED); 
         }
-        if (!album.descripcion) {
+        if (!album.descripcion || album.descripcion.length < 1) {
             throw new BusinessLogicException("The description of the album is required", BusinessError.PRECONDITION_FAILED); 
         }
         return await this.albumRepository.save(album);

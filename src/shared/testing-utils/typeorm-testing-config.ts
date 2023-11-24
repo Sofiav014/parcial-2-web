@@ -10,11 +10,13 @@ export const TypeOrmTestingConfig = () => [
     type: 'sqlite',
     database: ':memory:',
     dropSchema: true,
+    //TODO: complete with entities
     entities: [],
     // entities: [GameEntity, UserEntity, GenreEntity, NotificationEntity],
     synchronize: true,
     keepConnectionAlive: true
   }),
+  //TODO: complete with entities
   TypeOrmModule.forFeature([]),
   // TypeOrmModule.forFeature([GameEntity, UserEntity, GenreEntity, NotificationEntity]),
  ];

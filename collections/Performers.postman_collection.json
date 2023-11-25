@@ -1,0 +1,376 @@
+{
+	"info": {
+		"_postman_id": "9f820c70-90f1-4a42-b030-259e792039e5",
+		"name": "Performers",
+		"description": "Sofia Velasquez Marin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25797145",
+		"_collection_link": "https://lunar-moon-300792.postman.co/workspace/Web~88b8dad5-c031-4ca1-8d89-464268eec331/collection/25797145-9f820c70-90f1-4a42-b030-259e792039e5?action=share&source=collection_link&creator=25797145"
+	},
+	"item": [
+		{
+			"name": "Add performer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"performer_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Taylor Swift\",\r\n    \"imagen\": \"https://imagenes.20minutos.es/files/image_640_360/uploads/imagenes/2023/10/16/taylor-swift-the-eras-tour.jpeg\",\r\n    \"descripcion\": \"Taylor Alison Swift es una cantautora, productora, directora, actriz y empresaria estadounidense.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/performers",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"performers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add performer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Taylor Swift\",\r\n    \"imagen\": \"https://imagenes.20minutos.es/files/image_640_360/uploads/imagenes/2023/10/16/taylor-swift-the-eras-tour.jpeg\",\r\n    \"descripcion\": \"Taylor Alison Swift es una cantautora, productora, directora, actriz y empresaria estadounidense.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/performers",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"performers"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"Taylor Swift\",\n    \"imagen\": \"https://imagenes.20minutos.es/files/image_640_360/uploads/imagenes/2023/10/16/taylor-swift-the-eras-tour.jpeg\",\n    \"descripcion\": \"Taylor Alison Swift es una cantautora, productora, directora, actriz y empresaria estadounidense.\",\n    \"id\": \"d445c9d6-ac60-4299-98d3-b13cf6dae231\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Add performer with invalid description",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The description of the performer must be less than 100 characters\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Taylor Swift\",\r\n    \"imagen\": \"https://imagenes.20minutos.es/files/image_640_360/uploads/imagenes/2023/10/16/taylor-swift-the-eras-tour.jpeg\",\r\n    \"descripcion\": \"Taylor Alison Swift es una cantautora, productora, directora, actriz y empresaria estadounidense. Criada en Wyomissing, se mudó a Nashville a los 14 años para realizar una carrera de música country.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/performers",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"performers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add performer with invalid description",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Taylor Swift\",\r\n    \"imagen\": \"https://imagenes.20minutos.es/files/image_640_360/uploads/imagenes/2023/10/16/taylor-swift-the-eras-tour.jpeg\",\r\n    \"descripcion\": \"Taylor Alison Swift es una cantautora, productora, directora, actriz y empresaria estadounidense. Criada en Wyomissing, se mudó a Nashville a los 14 años para realizar una carrera de música country.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/performers",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"performers"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"The description of the performer must be less than 100 characters\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all performers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('Number of performers > ' + 0, function () {\r",
+							"    var data = pm.response.json()\r",
+							"    pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/performers",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"performers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all performers",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/performers",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"performers"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"d445c9d6-ac60-4299-98d3-b13cf6dae231\",\n        \"nombre\": \"Taylor Swift\",\n        \"imagen\": \"https://imagenes.20minutos.es/files/image_640_360/uploads/imagenes/2023/10/16/taylor-swift-the-eras-tour.jpeg\",\n        \"descripcion\": \"Taylor Alison Swift es una cantautora, productora, directora, actriz y empresaria estadounidense.\",\n        \"albums\": []\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get one performer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/performers/{{performer_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"performers",
+						"{{performer_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get one performer",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/performers/{{performer_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"performers",
+								"{{performer_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"d445c9d6-ac60-4299-98d3-b13cf6dae231\",\n    \"nombre\": \"Taylor Swift\",\n    \"imagen\": \"https://imagenes.20minutos.es/files/image_640_360/uploads/imagenes/2023/10/16/taylor-swift-the-eras-tour.jpeg\",\n    \"descripcion\": \"Taylor Alison Swift es una cantautora, productora, directora, actriz y empresaria estadounidense.\",\n    \"albums\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Get one invalid performer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The performer with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/performers/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"performers",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get one invalid performer",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/performers/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"performers",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The performer with the given id was not found\"\n}"
+				}
+			]
+		}
+	]
+}

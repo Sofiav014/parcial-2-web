@@ -1,0 +1,548 @@
+{
+	"info": {
+		"_postman_id": "fe8b318b-268d-4055-827b-d793a6cfd0c9",
+		"name": "Tracks",
+		"description": "Sofia Velasquez Marin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25797145",
+		"_collection_link": "https://lunar-moon-300792.postman.co/workspace/Web~88b8dad5-c031-4ca1-8d89-464268eec331/collection/25797145-fe8b318b-268d-4055-827b-d793a6cfd0c9?action=share&source=collection_link&creator=25797145"
+	},
+	"item": [
+		{
+			"name": "Add album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"album_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Taylor Swift 1989 (Taylor's Version)\",\r\n    \"caratula\": \"https://media.pitchfork.com/photos/650de105eacc5b460e151343/1:1/w_450%2Ch_450%2Cc_limit/undefined\",\r\n    \"fechaLanzamiento\": \"2023-10-27\",\r\n    \"descripcion\": \"1989 (Taylor's Version) es el cuarto álbum de estudio regrabado de la cantautora estadounidense Taylor Swift\",\r\n    \"tracks\":[\r\n        {\r\n            \"id\": \"981cb069-a529-436f-bdb4-bb4728fbb0e3\",\r\n            \"nombre\": \"Taylor Swift 1989 (Taylor's Version)\",\r\n            \"caratula\": \"https://media.pitchfork.com/photos/650de105eacc5b460e151343/1:1/w_450%2Ch_450%2Cc_limit/undefined\",\r\n            \"fechaLanzamiento\": \"2023-10-27T05:00:00.000Z\",\r\n            \"descripcion\": \"1989 (Taylor's Version) es el cuarto álbum de estudio regrabado de la cantautora estadounidense Taylor Swift\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/albums",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"albums"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add album",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Taylor Swift 1989 (Taylor's Version)\",\r\n    \"caratula\": \"https://media.pitchfork.com/photos/650de105eacc5b460e151343/1:1/w_450%2Ch_450%2Cc_limit/undefined\",\r\n    \"fechaLanzamiento\": \"2023-10-27\",\r\n    \"descripcion\": \"1989 (Taylor's Version) es el cuarto álbum de estudio regrabado de la cantautora estadounidense Taylor Swift\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/albums",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"albums"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"Taylor Swift 1989 (Taylor's Version)\",\n    \"caratula\": \"https://media.pitchfork.com/photos/650de105eacc5b460e151343/1:1/w_450%2Ch_450%2Cc_limit/undefined\",\n    \"fechaLanzamiento\": \"2023-10-27\",\n    \"descripcion\": \"1989 (Taylor's Version) es el cuarto álbum de estudio regrabado de la cantautora estadounidense Taylor Swift\",\n    \"id\": \"b5d397ec-8c58-41c7-990a-0d7121aba337\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Add track",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"track_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Blank Space\",\r\n    \"duracion\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/tracks/{{album_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tracks",
+						"{{album_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add track",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Blank Space\",\r\n    \"duracion\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/tracks/{{album_id_2}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tracks",
+								"{{album_id_2}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"Blank Space\",\n    \"duracion\": 4,\n    \"album\": {\n        \"id\": \"981cb069-a529-436f-bdb4-bb4728fbb0e3\",\n        \"nombre\": \"Taylor Swift 1989 (Taylor's Version)\",\n        \"caratula\": \"https://media.pitchfork.com/photos/650de105eacc5b460e151343/1:1/w_450%2Ch_450%2Cc_limit/undefined\",\n        \"fechaLanzamiento\": \"2023-10-27T05:00:00.000Z\",\n        \"descripcion\": \"1989 (Taylor's Version) es el cuarto álbum de estudio regrabado de la cantautora estadounidense Taylor Swift\"\n    },\n    \"id\": \"c1169998-ef4b-407c-8d95-26ac26bf896c\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Add track to invalid album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The album with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Blank Space\",\r\n    \"duracion\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/tracks/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tracks",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add track to invalid album",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Blank Space\",\r\n    \"duracion\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/tracks/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tracks",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The album with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Add track to invalid duration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The duration of the track must be positive\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Blank Space\",\r\n    \"duracion\": -2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/tracks/{{album_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tracks",
+						"{{album_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add track to invalid duration",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Blank Space\",\r\n    \"duracion\": -2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/tracks/{{album_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tracks",
+								"{{album_id}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"The duration of the track must be positive\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all tracks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('Number of tracks > ' + 0, function () {\r",
+							"    var data = pm.response.json()\r",
+							"    pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tracks",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tracks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all tracks",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tracks",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tracks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"ddbde709-f332-4afe-980b-9e7a94be777b\",\n        \"nombre\": \"Blank Space\",\n        \"duracion\": 4,\n        \"album\": {\n            \"id\": \"d227d2e2-39c0-4b17-89d0-96bbf4cd68f8\",\n            \"nombre\": \"Taylor Swift 1989 (Taylor's Version)\",\n            \"caratula\": \"https://media.pitchfork.com/photos/650de105eacc5b460e151343/1:1/w_450%2Ch_450%2Cc_limit/undefined\",\n            \"fechaLanzamiento\": \"2023-10-27T05:00:00.000Z\",\n            \"descripcion\": \"1989 (Taylor's Version) es el cuarto álbum de estudio regrabado de la cantautora estadounidense Taylor Swift\"\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get one track",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tracks/{{track_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tracks",
+						"{{track_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get one track",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tracks/{{track_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tracks",
+								"{{track_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"ddbde709-f332-4afe-980b-9e7a94be777b\",\n    \"nombre\": \"Blank Space\",\n    \"duracion\": 4,\n    \"album\": {\n        \"id\": \"d227d2e2-39c0-4b17-89d0-96bbf4cd68f8\",\n        \"nombre\": \"Taylor Swift 1989 (Taylor's Version)\",\n        \"caratula\": \"https://media.pitchfork.com/photos/650de105eacc5b460e151343/1:1/w_450%2Ch_450%2Cc_limit/undefined\",\n        \"fechaLanzamiento\": \"2023-10-27T05:00:00.000Z\",\n        \"descripcion\": \"1989 (Taylor's Version) es el cuarto álbum de estudio regrabado de la cantautora estadounidense Taylor Swift\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get one invalid track",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The track with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tracks/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tracks",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get one invalid track",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tracks/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tracks",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The track with the given id was not found\"\n}"
+				}
+			]
+		}
+	]
+}

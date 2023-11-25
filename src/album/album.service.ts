@@ -48,23 +48,4 @@ export class AlbumService {
         }
         await this.albumRepository.delete(id);
     }
-
-    async addTrackToAlbum(albumId: string, trackId: string): Promise<AlbumEntity> {
-        const album: AlbumEntity = await this.albumRepository.findOne({where: {id: albumId}, relations: ["tracks"]});
-        if (!album) {
-            throw new BusinessLogicException("The album with the given id was not found", BusinessError.NOT_FOUND);
-        }
-        const track: TrackEntity = await this.trackRepository.findOne({where: {id: trackId}});
-        if (!track) {
-            throw new BusinessLogicException("The track with the given id was not found", BusinessError.NOT_FOUND);
-        }
-
-        const trackAlbum = album.tracks.find(trackAlbum => trackAlbum.id === track.id);
-        if (trackAlbum) {
-            throw new BusinessLogicException("The album already has the track associated", BusinessError.BAD_REQUEST);
-        }
-
-        album.tracks = [...album.tracks, track];
-        return await this.albumRepository.save(album);
-    }
 }

@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, UseInterceptors } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { BusinessErrorsInterceptor } from '../shared/interceptors/business-errors.interceptor';
 import { AlbumDto } from './album.dto/album.dto';
@@ -15,11 +15,6 @@ export class AlbumController {
     async create(@Body() albumDto: AlbumDto) {
         const album: AlbumEntity  = plainToInstance(AlbumEntity, albumDto);
         return plainToInstance(AlbumDto, await this.albumService.create(album));
-    }
-
-    @Put(':albumId/tracks/:trackId')
-    async addTrackToAlbum(@Param('albumId') albumId: string, @Param('trackId') trackId: string) {
-        return await this.albumService.addTrackToAlbum(albumId, trackId);
     }
 
     @Get(':id')

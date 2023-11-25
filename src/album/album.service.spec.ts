@@ -4,12 +4,15 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
+import { TrackEntity } from '../track/track.entity/track.entity';
 import { AlbumEntity } from './album.entity/album.entity';
 import { AlbumService } from './album.service';
+
 
 describe('AlbumService', () => {
   let service: AlbumService;
   let repository: Repository<AlbumEntity>;
+  let trackRepository: Repository<TrackEntity>;
   let albumList: AlbumEntity[];
 
   beforeEach(async () => {
@@ -20,6 +23,8 @@ describe('AlbumService', () => {
 
     service = module.get<AlbumService>(AlbumService);
     repository = module.get<Repository<AlbumEntity>>(getRepositoryToken(AlbumEntity));
+    trackRepository = module.get<Repository<TrackEntity>>(getRepositoryToken(TrackEntity));
+
     await seedDatabase();
   });
 
@@ -108,5 +113,34 @@ describe('AlbumService', () => {
     expect(albums).not.toBeNull();
     expect(albums.length).toEqual(albumList.length);
   });
+
+  it('delete should delete an album', async () => {
+    const newAlbum = albumList[0];
+    await service.delete(newAlbum.id);
+    const album = await repository.findOne({ where: { id: newAlbum.id } });
+    expect(album).toBeNull();
+  });
+
+  it('delete should throw an error when the album does not exist', async () => {
+    await expect(service.delete("-1")).rejects.toHaveProperty("message", "The album with the given id was not found");
+  });
+
+  it('delete should throw an error when the album has tracks associated', async () => {
+    const album = await repository.findOne({ where: { id: albumList[1].id }, relations: ["tracks"] });
+
+    const track: TrackEntity = {
+      id: "",
+      nombre: faker.person.firstName(),
+      duracion: faker.number.int({ min: 1 }),
+      album: album,
+    };
+    const newTrack = await trackRepository.save(track);
+
+    album.tracks = [...album.tracks, newTrack];
+
+    await repository.save(album);
+    await expect(service.delete(album.id)).rejects.toHaveProperty("message", "The album has tracks associated");
+  });
+
 
 });

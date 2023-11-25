@@ -25,7 +25,7 @@ export class AlbumService {
     async findOne(id: string): Promise<AlbumEntity> {
         const album = await this.albumRepository.findOne({where: {id}, relations: ["tracks", "performers"]});
         if (!album) {
-            throw new BusinessLogicException("The album does not exist", BusinessError.NOT_FOUND);
+            throw new BusinessLogicException("The album with the given id was not found", BusinessError.NOT_FOUND);
         }
         return album;
     }
@@ -37,7 +37,7 @@ export class AlbumService {
     async delete(id: string): Promise<void> {
         const album = await this.albumRepository.findOne({where: {id}, relations: ["tracks"]});
         if (!album) {
-            throw new BusinessLogicException("The album does not exist", BusinessError.NOT_FOUND);
+            throw new BusinessLogicException("The album with the given id was not found", BusinessError.NOT_FOUND);
         }
         if (album.tracks.length > 0) {
             throw new BusinessLogicException("The album has tracks associated", BusinessError.PRECONDITION_FAILED);

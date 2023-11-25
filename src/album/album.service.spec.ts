@@ -27,7 +27,7 @@ describe('AlbumService', () => {
     repository.clear();
     albumList = [];
     for (let i = 0; i < 10; i++) {
-      const album = repository.create({
+      const album = await repository.save({
         nombre: faker.person.firstName(),
         caratula: faker.image.url(),
         fechaLanzamiento: faker.date.past(),
@@ -41,7 +41,7 @@ describe('AlbumService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should create an album', async () => {
+  it('create should create an album', async () => {
     const album: AlbumEntity = {
       id: "",
       nombre: faker.person.firstName(),
@@ -62,7 +62,7 @@ describe('AlbumService', () => {
     expect(storedAlbum.descripcion).toEqual(album.descripcion);
   });
 
-  it('should throw an error when the name of the album is not provided', async () => {
+  it('create should throw an error when the name of the album is not provided', async () => {
     const album: AlbumEntity = {
       id: "",
       nombre: "",
@@ -75,7 +75,7 @@ describe('AlbumService', () => {
     await expect(service.create(album)).rejects.toHaveProperty("message", "The name of the album is required");
   });
 
-  it('should throw an error when the description of the album is not provided', async () => {
+  it('create should throw an error when the description of the album is not provided', async () => {
     const album: AlbumEntity = {
       id: "",
       nombre: faker.person.firstName(),
@@ -88,6 +88,25 @@ describe('AlbumService', () => {
     await expect(service.create(album)).rejects.toHaveProperty("message", "The description of the album is required");
   });
 
-  
+  it('findOne should return an album', async () => {
+
+    const newAlbum = albumList[0];
+    const album = await service.findOne(newAlbum.id);
+    expect(album).not.toBeNull();
+    expect(album.nombre).toEqual(newAlbum.nombre);
+    expect(album.caratula).toEqual(newAlbum.caratula);
+    expect(album.fechaLanzamiento).toEqual(newAlbum.fechaLanzamiento);
+    expect(album.descripcion).toEqual(newAlbum.descripcion);
+  });
+
+  it('findOne should throw an error when the album does not exist', async () => {
+    await expect(service.findOne("-1")).rejects.toHaveProperty("message", "The album with the given id was not found");
+  });
+
+  it('findAll should return a list of albums', async () => {
+    const albums = await service.findAll();
+    expect(albums).not.toBeNull();
+    expect(albums.length).toEqual(albumList.length);
+  });
 
 });

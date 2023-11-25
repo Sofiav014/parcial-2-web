@@ -22,7 +22,7 @@ export class TrackService {
         }
         const album = await this.albumRepository.findOne({where: {id: albumId}});
         if (!album) {
-            throw new BusinessLogicException("The album does not exist", BusinessError.NOT_FOUND);
+            throw new BusinessLogicException("The album with the given id was not found", BusinessError.NOT_FOUND);
         }
         track.album = album;
         return await this.trackRepository.save(track);
@@ -31,7 +31,7 @@ export class TrackService {
     async findOne(id: string): Promise<TrackEntity> {
         const track = await this.trackRepository.findOne({where: {id}, relations: ["album"]});
         if (!track) {
-            throw new BusinessLogicException("The track does not exist", BusinessError.NOT_FOUND);
+            throw new BusinessLogicException("The track with the given id was not found", BusinessError.NOT_FOUND);
         }
         return track;
     }
@@ -39,12 +39,4 @@ export class TrackService {
     async findAll(): Promise<TrackEntity[]> {
         return await this.trackRepository.find({relations: ["album"]});
     }
-
-    // async delete(id: string): Promise<void> {
-    //     const track = await this.trackRepository.findOne({where: {id}});
-    //     if (!track) {
-    //         throw new BusinessLogicException("The track does not exist", BusinessError.NOT_FOUND);
-    //     }
-    //     await this.trackRepository.delete(id);
-    // }
 }

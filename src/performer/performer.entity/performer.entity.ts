@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { AlbumEntity } from "../../album/album.entity/album.entity";
 @Entity()
 export class PerformerEntity {
@@ -15,8 +15,6 @@ export class PerformerEntity {
     @Column()
     descripcion: string;
 
-    // 0..3 PerformerEntity tiene muchos AlbumEntity
     @ManyToMany(() => AlbumEntity, (album) => album.performers)
-    @JoinTable()
     albums: AlbumEntity[];
 }

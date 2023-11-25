@@ -22,7 +22,7 @@ export class PerformerService {
     async findOne(id: string): Promise<PerformerEntity> {
         const performer = await this.performerRepository.findOne({where: {id}, relations: ["albums"]});
         if (!performer) {
-            throw new BusinessLogicException("The performer does not exist", BusinessError.NOT_FOUND);
+            throw new BusinessLogicException("The performer with the given id was not found", BusinessError.NOT_FOUND);
         }
         return performer;
     }
@@ -30,17 +30,6 @@ export class PerformerService {
     async findAll(): Promise<PerformerEntity[]> {
         return await this.performerRepository.find({relations: ["albums"]});
     }
-
-    // async delete(id: string): Promise<void> {
-    //     const performer = await this.performerRepository.findOne({where: {id}, relations: ["albums"]});
-    //     if (!performer) {
-    //         throw new BusinessLogicException("The performer does not exist", BusinessError.NOT_FOUND);
-    //     }
-    //     if (performer.albums.length > 0) {
-    //         throw new BusinessLogicException("The performer has albums associated", BusinessError.PRECONDITION_FAILED);
-    //     }
-    //     await this.performerRepository.delete(id);
-    // }
 
 }
 

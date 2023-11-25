@@ -13,7 +13,6 @@ export class TrackEntity {
     @Column()
     duracion: number;  
     
-    // muchos TrackEntity tiene 1 AlbumEntity (compuesto por)
     @ManyToOne(() => AlbumEntity, (album) => album.tracks)
     album: AlbumEntity;
 }
